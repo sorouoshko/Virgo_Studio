@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Virgo Studio — خلاقیت بی‌مرز</title>
+
+  <!-- Google Fonts: Vazirmatn (فارسی) + Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+  :root{
+    --bg:#0b1020;
+    --card:#0f1724;
+    --accent:#ff8c42;
+    --accent-2:#6dd3ff;
+    --glass: rgba(255,255,255,0.06);
+    --muted: #9aa4b2;
+    --glass-border: rgba(255,255,255,0.06);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Vazirmatn", "Poppins", Tahoma, sans-serif;
+    background:
+      radial-gradient(1200px 400px at 10% 10%, rgba(34,40,52,0.45), transparent 10%),
+      linear-gradient(180deg, rgba(5,8,16,1) 0%, rgba(11,16,32,1) 100%);
+    color:#e6eef8;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+    padding-top:72px; /* header offset */
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed;
+    top:8px;
+    left:8px;
+    right:8px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    z-index:999;
+    background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius:12px;
+    padding:8px 18px;
+    backdrop-filter: blur(6px) saturate(120%);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:default;
+  }
+  .logo .mark{
+    width:44px;height:44px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+    background: linear-gradient(135deg,var(--accent), #ffd18a);
+    color:#08101a;
+    box-shadow: 0 6px 18px rgba(255,140,66,0.18), inset 0 -6px 18px rgba(255,255,255,0.08);
+    transform: translateZ(0);
+  }
+  .logo .text{
+    font-weight:700;
+    letter-spacing:0.6px;
+    color: white;
+    font-size:18px;
+  }
+
+  nav{display:flex;gap:8px;align-items:center}
+  nav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-weight:600;
+    padding:8px 12px;
+    border-radius:8px;
+    transition: all .25s ease;
+    font-size:14px;
+  }
+  nav a:hover{ color: white; transform: translateY(-3px); background: rgba(255,255,255,0.02); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:72vh;
+    display:grid;
+    grid-template-columns: 1fr 460px;
+    gap:36px;
+    align-items:center;
+    padding:48px;
+    max-width:1200px;
+    margin:0 auto;
+  }
+
+  .hero-left{
+    max-width:720px;
+    padding:18px 6px;
+  }
+  .eyebrow{
+    display:inline-block;
+    background: linear-gradient(90deg,var(--accent-2), var(--accent));
+    color:#021018;
+    padding:6px 12px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:13px;
+    margin-bottom:18px;
+    box-shadow: 0 6px 20px rgba(13,44,63,0.3);
+  }
+
+  .hero h1{
+    font-size:46px;
+    line-height:1.02;
+    margin:8px 0 16px;
+    color: #fff;
+    letter-spacing: -0.6px;
+    text-shadow: 0 10px 30px rgba(5,8,16,0.6);
+    animation: slideIn .8s ease both;
+  }
+  @keyframes slideIn{ from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none} }
+
+  .hero p{
+    color:var(--muted);
+    font-size:17px;
+    max-width:70ch;
+    margin-bottom:22px;
+  }
+
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;border:0;cursor:pointer;font-weight:700;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .btn-primary{
+    background: linear-gradient(90deg,var(--accent), #ffb37f);
+    color:#08101a;
+    box-shadow: 0 10px 30px rgba(255,140,66,0.15);
+  }
+  .btn-ghost{
+    background: transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    color:var(--muted);
+  }
+  .btn:hover{ transform: translateY(-4px); }
+
+  /* ---------- Right hero card (تصویر/کارت) ---------- */
+  .hero-card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border-radius:16px;
+    padding:18px;
+    border:1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 30px 80px rgba(2,6,12,0.7);
+    backdrop-filter: blur(6px);
+  }
+  .hero-card img{ width:100%; border-radius:12px; display:block; }
+  .hero-card .caption{ margin-top:12px; color:var(--muted); font-size:14px }
+
+  /* ---------- Projects ---------- */
+  .projects{
+    padding:40px 48px;
+    max-width:1200px;
+    margin: 18px auto;
+  }
+  .projects h2{ color:var(--accent); font-size:28px; margin-bottom:18px; }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+  }
+  .proj{
+    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.06));
+    border-radius:12px;
+    padding:12px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.025);
+    transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s;
+  }
+  .proj:hover{ transform: translateY(-10px) scale(1.01); box-shadow: 0 40px 80px rgba(2,6,12,0.6); }
+  .proj img{ width:100%; border-radius:10px; display:block; }
+  .proj h3{ margin:10px 0 6px; color:#fff; font-size:16px }
+  .proj p{ color:var(--muted); font-size:13px }
+
+  /* ---------- Contact (شیک) ---------- */
+  .contact{
+    padding:54px 48px;
+    max-width:1200px;
+    margin: 12px auto 80px;
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:28px;
+    align-items:start;
+  }
+
+  .contact .left{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:16px;
+    padding:28px;
+    border:1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+  }
+  .contact h3{ color:var(--accent); margin:0 0 8px; font-size:20px }
+  .contact p.lead{ color:var(--muted); margin-bottom:16px }
+
+  .info-list{ display:flex; flex-direction:column; gap:12px; margin-top:12px }
+  .info{
+    display:flex; gap:14px; align-items:center; padding:12px; border-radius:10px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.012), transparent);
+    border: 1px solid rgba(255,255,255,0.02);
+  }
+  .info svg{ width:36px;height:36px; flex:0 0 36px; border-radius:8px; padding:6px; background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); }
+  .info .meta{ font-weight:700; color:#fff; font-size:15px }
+  .info .sub{ color:var(--muted); font-size:13px }
+
+  /* right: contact form */
+  .contact .right{
+    padding:22px;
+    border-radius:14px;
+    background: linear-gradient(180deg, rgba(13,17,26,0.7), rgba(8,12,20,0.7));
+    border:1px solid rgba(255,255,255,0.03);
+  }
+  .field{ display:flex; flex-direction:column; gap:8px; margin-bottom:12px }
+  input[type="text"], input[type="email"], textarea{
+    background: rgba(255,255,255,0.02);
+    color: #eaf3ff;
+    border: 1px solid rgba(255,255,255,0.03);
+    padding:12px;border-radius:10px; outline:none; font-size:14px;
+  }
+  textarea{ min-height:120px; resize:vertical }
+  .send-row{ display:flex; gap:12px; align-items:center; margin-top:8px }
+  .socials{ display:flex; gap:10px; margin-top:8px }
+  .chip{
+    display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:999px; font-weight:700;
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent);
+    border:1px solid rgba(255,255,255,0.03); color:var(--muted); font-size:13px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:36px 48px;
+    text-align:center;
+    color:var(--muted);
+    border-top:1px solid rgba(255,255,255,0.02);
+  }
+
+  /* Responsive */
+  @media (max-width:980px){
+    .hero{ grid-template-columns: 1fr; padding:28px }
+    .contact{ grid-template-columns: 1fr; padding:24px }
+    .hero-card{ order:-1 }
+  }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo" title="Virgo Studio">
+    <div class="mark">V</div>
+    <div class="text">Virgo Studio</div>
+  </div>
+
+  <nav aria-label="منوی اصلی">
+    <a href="#hero">خانه</a>
+    <a href="#projects">پروژه‌ها</a>
+    <a href="#contact">تماس</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero" role="banner" aria-label="معرفی">
+  <div class="hero-left">
+    <div class="eyebrow">استودیو ویِرگو — طراحی و انیمیشن</div>
+    <h1>ما داستان برند تو رو تصویر می‌کنیم</h1>
+    <p>Virgo Studio ترکیبی از طراحی خلاق، توسعهٔ وب مدرن و انیمیشن حرفه‌ایه. پروژه‌ها رو به شکل تعاملی، جذاب و قابل یادآوری می‌سازیم.</p>
+
+    <div class="cta-row" role="group" aria-label="تماس">
+      <button class="btn btn-primary" onclick="document.getElementById('contact-form-name').focus()">
+        شروع همکاری
+      </button>
+      <a class="btn btn-ghost" href="#projects" role="button">دیدن پروژه‌ها</a>
+    </div>
+
+    <div style="margin-top:22px;color:var(--muted);font-size:13px">
+      <span class="chip">تیم کوچک / سریع / خلاق</span>
+      <span class="chip" style="margin-inline-start:8px">پروژه‌های تحویل‌پذیر</span>
+    </div>
+  </div>
+
+  <aside class="hero-card" aria-hidden="false">
+    <img src="https://picsum.photos/600/360?grayscale" alt="نمونه کار ویِرگو">
+    <div class="caption">نمونهٔ نمایشی — طراحی UI/UX و موکاپ‌های حرکتی</div>
+  </aside>
+</section>
+
+<!-- Projects -->
+<section class="projects" id="projects" aria-labelledby="projects-heading">
+  <h2 id="projects-heading">پروژه‌های منتخب</h2>
+  <div class="grid" role="list">
+    <article class="proj" role="listitem" aria-label="پروژه 1">
+      <img src="https://picsum.photos/600/380?random=21" alt="پروژه 1">
+      <h3>وبسایت برند لوکس</h3>
+      <p>طراحی ریسپانسیو، سرعت بارگذاری بهینه و انیمیشن‌های نرم برای تجربه کاربری ممتاز.</p>
+    </article>
+
+    <article class="proj" role="listitem" aria-label="پروژه 2">
+      <img src="https://picsum.photos/600/380?random=34" alt="پروژه 2">
+      <h3>هویت بصری و لوگو</h3>
+      <p>ست بصری کامل شامل لوگو، پالت رنگ و راهنمای استفادهٔ برند.</p>
+    </article>
+
+    <article class="proj" role="listitem" aria-label="پروژه 3">
+      <img src="https://picsum.photos/600/380?random=45" alt="پروژه 3">
+      <h3>انیمیشن تبلیغاتی</h3>
+      <p>موشن‌گرافیک کوتاه برای شبکه‌های اجتماعی و تیزرهای تبلیغاتی.</p>
+    </article>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact" aria-labelledby="contact-heading">
+  <div class="left" aria-hidden="false">
+    <h3 id="contact-heading">با ما در تماس باش</h3>
+    <p class="lead">هر سوال، پروژه یا همکاری‌ای داری — با خوش‌رویی جواب می‌دیم. اطلاعات تماس پایین رو بردار یا تو فرم پیام بذار.</p>
+
+    <div class="info-list">
+      <!-- Email -->
+      <div class="info" title="ایمیل">
+        <!-- mail icon -->
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5v9A2.5 2.5 0 0 0 5.5 19h13a2.5 2.5 0 0 0 2.5-2.5v-9A2.5 2.5 0 0 0 18.5 5h-13A2.5 2.5 0 0 0 3 7.5z" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M21 7l-9 6L3 7" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/></svg>
+        <div>
+          <div class="meta">ایمیل</div>
+          <div class="sub"><a href="mailto:billmomo.pony@gmail.com" style="color:var(--muted);text-decoration:none">billmomo.pony@gmail.com</a></div>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="info" title="تلفن">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92V20a2 2 0 0 1-2.18 2A19.73 19.73 0 0 1 3 5.18 2 2 0 0 1 5 3h3.09a1 1 0 0 1 1 .75c.12.68.35 1.34.67 1.95a1 1 0 0 1-.24 1.09L8.7 8.7a14 14 0 0 0 6.6 6.6l.9-1.09a1 1 0 0 1 1.09-.24c.6.32 1.27.55 1.95.67a1 1 0 0 1 .75 1V20z" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/></svg>
+        <div>
+          <div class="meta">تلفن</div>
+          <div class="sub"><a href="tel:+989334501846" style="color:var(--muted);text-decoration:none">+98 933 450 1846</a></div>
+        </div>
+      </div>
+
+      <!-- Telegram -->
+      <div class="info" title="تلگرام">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 2L11 13" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><path d="M22 2l-7 20-4-8-8-4 19-8z" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/></svg>
+        <div>
+          <div class="meta">تلگرام</div>
+          <div class="sub"><a href="https://t.me/sovirgo" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none">@sovirgo</a></div>
+        </div>
+      </div>
+
+      <!-- Social / Instagram -->
+      <div class="info" title="اینستاگرام">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="0.6" opacity="0.6"/><path d="M16 11.37A4 4 0 1 1 11.37 7 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="0.6" opacity="0.6"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" opacity="0.6"/></svg>
+        <div>
+          <div class="meta">اینستاگرام</div>
+          <div class="sub"><a href="https://instagram.com/sovirgo" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none">@sovirgo</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right" aria-label="فرم تماس">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div>
+        <div style="font-weight:800;color:#fff;font-size:16px">فرم تماس سریع</div>
+        <div style="color:var(--muted);font-size:13px">نام، شماره و پیام را بفرست — ما ظرف ۲۴ ساعت پاسخ می‌دهیم.</div>
+      </div>
+      <div style="font-size:12px;color:var(--muted)">امن و بدون اسپم</div>
+    </div>
+
+    <form id="contact-form" onsubmit="sendMessage(event)">
+      <div class="field">
+        <label for="contact-form-name" style="color:var(--muted);font-size:13px">نام شما</label>
+        <input id="contact-form-name" name="name" type="text" placeholder="مثلاً: سروش">
+      </div>
+
+      <div class="field">
+        <label for="contact-form-email" style="color:var(--muted);font-size:13px">ایمیل یا تلفن</label>
+        <input id="contact-form-email" name="contact" type="text" placeholder="مثلاً: billmomo.pony@gmail.com یا +9893...">
+      </div>
+
+      <div class="field">
+        <label for="contact-form-message" style="color:var(--muted);font-size:13px">پیام شما</label>
+        <textarea id="contact-form-message" name="message" placeholder="چطور می‌تونیم کمکت کنیم؟"></textarea>
+      </div>
+
+      <div class="send-row">
+        <button type="submit" class="btn btn-primary">ارسال پیام</button>
+        <div style="color:var(--muted);font-size:13px">یا مستقیم ایمیل بزن: <a href="mailto:billmomo.pony@gmail.com" style="color:var(--accent);text-decoration:none">billmomo.pony@gmail.com</a></div>
+      </div>
+
+      <div class="socials" aria-hidden="true" style="margin-top:14px">
+        <a class="chip" href="mailto:billmomo.pony@gmail.com"><strong>✉</strong> ایمیل</a>
+        <a class="chip" href="tel:+989334501846"><strong>📞</strong> تماس</a>
+        <a class="chip" href="https://t.me/sovirgo" target="_blank" rel="noopener"><strong>✦</strong> تلگرام</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div style="max-width:1000px;margin:0 auto">
+    <div style="display:flex;justify-content:center;gap:18px;align-items:center;margin-bottom:12px">
+      <div style="font-weight:800;color:#fff">Virgo Studio</div>
+      <div style="color:var(--muted)">— خلاقیت، سرعت، دقت —</div>
+    </div>
+
+    <div style="color:var(--muted);font-size:13px">© 2026 Virgo Studio — ساخته شده با ❤ توسط دانی</div>
+  </div>
+</footer>
+
+<script>
+  // شبیه‌سازی ارسال پیام (فرم واقعی نیاز به سرور داره)
+  function sendMessage(e){
+    e.preventDefault();
+    const name = document.getElementById('contact-form-name').value.trim();
+    const contact = document.getElementById('contact-form-email').value.trim();
+    const message = document.getElementById('contact-form-message').value.trim();
+
+    if(!name || !contact || !message){
+      alert('لطفاً همهٔ فیلدها را پر کنید.');
+      return;
+    }
+
+    // ساخت یک mailto ساده برای تست (نیازی به سرور نیست)
+    const subject = encodeURIComponent('پیام از وبسایت Virgo Studio — ' + name);
+    const body = encodeURIComponent('نام: ' + name + '\\nارتباط: ' + contact + '\\n\\nپیام:\\n' + message);
+    window.location.href = 'mailto:billmomo.pony@gmail.com?subject=' + subject + '&body=' + body;
+  }
+</script>
+
+</body>
+</html>
