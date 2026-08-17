@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virgo Studio | Soroush Koushani</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="httبازیps://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
+
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/font-face.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         :root {
             /* --- iOS Glass Theme (Refined) --- */
-            --glass-bg: rgba(30, 30, 30, 0.4); /* Less watery, more matte */
-            --glass-border: rgba(255, 255, 255, 0.08); /* Subtle crisp edge */
-            --glass-blur: 25px; /* Heavy blur for premium feel */
+            --glass-bg: rgba(30, 30, 30, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: 25px;
             --glass-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            
+
             /* --- Brand Colors --- */
             --gold: #bf953f;
             --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728);
@@ -29,7 +29,7 @@
             --bg-dark: #020105;
             --text-main: #ffffff;
             --text-muted: #9CA3AF;
-            
+
             /* --- Layout --- */
             --radius-lg: 24px;
             --radius-md: 16px;
@@ -49,6 +49,19 @@
             overflow-x: hidden;
             min-height: 100vh;
             line-height: 1.6;
+            position: relative;
+        }
+
+        /* Subtle film-grain overlay for a more premium, less "flat" feel */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.035;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
         /* RTL Setup */
@@ -56,7 +69,7 @@
             direction: rtl;
             font-family: 'Vazirmatn', sans-serif;
         }
-        
+
         .lang-fa { display: none; }
         body.rtl .lang-en { display: none; }
         body.rtl .lang-fa { display: inline; }
@@ -90,9 +103,16 @@
 
         .gold-text {
             background: var(--gold-gradient);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
+            animation: shimmer 6s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
         /* --- Header --- */
@@ -102,9 +122,14 @@
             z-index: 1000;
             padding: 15px 0;
             transition: 0.4s ease;
-            background: rgba(2, 1, 5, 0.7); /* Darker fade */
+            background: rgba(2, 1, 5, 0.7);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        header.scrolled {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-bottom-color: rgba(191, 149, 63, 0.15);
         }
 
         nav {
@@ -124,6 +149,7 @@
             height: 45px;
             width: auto;
             object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(191, 149, 63, 0.25));
         }
 
         .brand span {
@@ -162,10 +188,10 @@
             content: '';
             position: absolute;
             bottom: -5px; left: 0; width: 0; height: 2px;
-            background: var(--gold);
+            background: var(--gold-gradient);
             transition: 0.3s;
         }
-        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
         .lang-btn {
             padding: 6px 16px;
@@ -184,6 +210,7 @@
             background: var(--gold);
             border-color: var(--gold);
             color: #000;
+            box-shadow: 0 0 20px rgba(191, 149, 63, 0.4);
         }
 
         /* --- Hero Section --- */
@@ -205,7 +232,7 @@
 
         .hero-text {
             flex: 1;
-            opacity: 0; /* For animation */
+            opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards 0.5s;
         }
@@ -220,11 +247,22 @@
             font-weight: 600;
         }
 
+        .tagline::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 1px;
+            background: var(--gold);
+            margin-inline-end: 10px;
+            vertical-align: middle;
+        }
+
         .hero h1 {
             font-size: 4.5rem;
             line-height: 1.1;
             margin-bottom: 25px;
             font-weight: 800;
+            text-shadow: 0 0 60px rgba(123, 44, 191, 0.35);
         }
 
         .hero p {
@@ -250,15 +288,20 @@
             height: 480px;
             position: relative;
             z-index: 2;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-frame:hover {
+            transform: translateY(-6px);
         }
 
         .profile-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 200px 200px 20px 20px; /* Arch shape */
+            border-radius: 200px 200px 20px 20px;
             border: 2px solid rgba(255,255,255,0.1);
-            box-shadow: 0 0 50px rgba(123, 44, 191, 0.3); /* Purple glow */
+            box-shadow: 0 0 50px rgba(123, 44, 191, 0.3);
             filter: grayscale(20%) contrast(110%);
         }
 
@@ -281,6 +324,13 @@
             margin-bottom: 70px;
         }
 
+        .section-header .tagline {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-header .tagline::before { display: none; }
+
         .section-header h2 {
             font-size: 3rem;
             margin-bottom: 15px;
@@ -298,14 +348,33 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease;
             border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .story-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--gold-gradient);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
         }
 
         .story-card:hover {
             transform: translateY(-12px);
-            box-shadow: 0 20px 40px rgba(123, 44, 191, 0.2);
-            border-color: var(--gold);
+            box-shadow: 0 25px 50px rgba(123, 44, 191, 0.25);
+            border-color: transparent;
+        }
+
+        .story-card:hover::after {
+            opacity: 1;
         }
 
         .story-bg {
@@ -356,12 +425,26 @@
 
         /* --- Contact & Footer --- */
         .contact { padding-bottom: 50px; }
-        
+
         .contact-box {
             padding: 80px 40px;
             text-align: center;
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(123, 44, 191, 0.25), transparent 70%);
+            pointer-events: none;
         }
 
         .socials {
@@ -370,6 +453,7 @@
             gap: 20px;
             margin-top: 40px;
             flex-wrap: wrap;
+            position: relative;
         }
 
         .social-link {
@@ -385,10 +469,11 @@
         }
 
         .social-link:hover {
-            background: #fff;
+            background: var(--gold-gradient);
+            border-color: transparent;
             color: #000;
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            transform: scale(1.1) translateY(-4px);
+            box-shadow: 0 10px 25px rgba(191, 149, 63, 0.35);
         }
 
         .footer-bottom {
@@ -400,6 +485,7 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
+            position: relative;
         }
 
         .footer-logo {
@@ -407,7 +493,7 @@
             opacity: 0.7;
             transition: 0.3s;
         }
-        .footer-logo:hover { opacity: 1; }
+        .footer-logo:hover { opacity: 1; transform: scale(1.05); }
 
         .copyright {
             color: var(--text-muted);
@@ -438,12 +524,21 @@
             transform: translateY(0);
         }
 
+        /* Respect reduced-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .hero-content { flex-direction: column-reverse; text-align: center; }
             body.rtl .hero-content { flex-direction: column-reverse; }
             .hero h1 { font-size: 3rem; }
-            .nav-links { display: none; } /* Mobile Menu hidden for simplicity */
+            .nav-links { display: none; }
             .profile-frame { width: 300px; height: 380px; }
         }
     </style>
@@ -456,10 +551,11 @@
         <div class="container">
             <nav>
                 <a href="#" class="brand">
-                    <img src="https://i.postimg.cc/wTcDpKfS/IMG-20260128-171455-915.png" alt="Virgo Logo">
+                    <!-- LINK #1: Virgo Studio logo image (header) -->
+                    <img src="https://i.postimg.cc/sXsn5q4N/IMG-20260817-032828-503.jpg" alt="Virgo Logo">
                     <span>VIRGO STUDIO</span>
                 </a>
-                
+
                 <div class="nav-actions">
                     <div class="nav-links">
                         <a href="#hero" class="active"><span class="lang-en">Home</span><span class="lang-fa">خانه</span></a>
@@ -486,7 +582,7 @@
                     </h1>
                     <p>
                         <span class="lang-en">I am Soroush Koushani. Virgo Studio is my vessel to explore the unknown. We don't just build games; we craft independent universes that challenge reality.</span>
-                        <span class="lang-fa">من سروش کوشانی هستم. استودیو ویرگو سفینه من برای کشف ناشناخته‌هاست. ما فقط بازی نمی‌سازیم؛ ما دنیاهای مستقلی خلق می‌کنیم که واقعیت را به چالش می‌کشند.</span>
+                        <span class="lang-fa">من سروش کوشانی هستم. استودیو ویرگو سفینه من برای کشف ناشناخته‌هاست. ما فقط  نمی‌سازیم؛ ما دنیاهای مستقلی خلق می‌کنیم که واقعیت را به چالش می‌کشند.</span>
                     </p>
                     <a href="#stories" class="lang-btn" style="background: var(--gold); color: #000; border: none; padding: 12px 30px; font-size: 1rem; text-decoration: none;">
                         <span class="lang-en">Enter The Void</span>
@@ -498,7 +594,8 @@
                     <div class="orb orb-1"></div>
                     <div class="orb orb-2"></div>
                     <div class="profile-frame glass-panel">
-                        <img src="https://i.postimg.cc/JnZG5JSx/SAVE-20251030-194007.jpg" alt="Soroush Koushani">
+                        <!-- LINK #2: Soroush's profile photo (hero section) -->
+                        <img src="https://i.postimg.cc/CKL71kht/IMG-20260718-204719-400.jpg" alt="Soroush Koushani">
                     </div>
                 </div>
             </div>
@@ -508,6 +605,7 @@
     <section id="stories" class="stories">
         <div class="container">
             <div class="section-header reveal">
+                <span class="tagline"><span class="lang-en">The Collection</span><span class="lang-fa">مجموعه</span></span>
                 <h2>
                     <span class="lang-en">The <span class="gold-text">Archives</span></span>
                     <span class="lang-fa">آرشیو <span class="gold-text">داستان‌ها</span></span>
@@ -516,7 +614,8 @@
 
             <div class="grid">
                 <div class="story-card reveal">
-                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=1000&auto=format&fit=crop" class="story-bg" alt="Cyberpunk">
+                    <!-- LINK #3: Cover image for "Cyberpunk Zero" -->
+                    <img src="https://i.postimg.cc/hjQ9z0H8/Polish-20260610-032115065.jpg" class="story-bg" alt="Cyberpunk">
                     <div class="story-content">
                         <span class="status-badge">
                             <span class="lang-en">Coming Soon</span><span class="lang-fa">به زودی</span>
@@ -530,7 +629,8 @@
                 </div>
 
                 <div class="story-card reveal" style="transition-delay: 100ms;">
-                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1000&auto=format&fit=crop" class="story-bg" alt="Minecraft Dark">
+                    <!-- LINK #4: Cover image for "Minecraft: CURSE THIS WORLD" -->
+                    <img src="https://i.postimg.cc/W3SPZMgG/Polish-20260817-041320328.jpg" class="story-bg" alt="Minecraft Dark">
                     <div class="story-content">
                         <span class="status-badge">
                             <span class="lang-en">Coming Soon</span><span class="lang-fa">به زودی</span>
@@ -544,7 +644,8 @@
                 </div>
 
                 <div class="story-card reveal" style="transition-delay: 200ms;">
-                    <img src="https://images.unsplash.com/photo-1516934024742-b461fba47600?q=80&w=1000&auto=format&fit=crop" class="story-bg" alt="Cave">
+                    <!-- LINK #5: Cover image for "Alverest" -->
+                    <img src="https://i.postimg.cc/3R2kQbMM/file-00000000c95881f78fcaab875bba975b.png" class="story-bg" alt="Cave">
                     <div class="story-content">
                         <span class="status-badge">
                             <span class="lang-en">Coming Soon</span><span class="lang-fa">به زودی</span>
@@ -558,7 +659,8 @@
                 </div>
 
                 <div class="story-card reveal" style="transition-delay: 300ms;">
-                    <img src="https://images.unsplash.com/photo-1504221507732-5246c045949b?q=80&w=1000&auto=format&fit=crop" class="story-bg" alt="Psychology">
+                    <!-- LINK #6: Cover image for "Intra Man" -->
+                    <img src="https://i.postimg.cc/zB2c5pTd/file-0000000036e8720b82a040fc6f002128.png" class="story-bg" alt="Psychology">
                     <div class="story-content">
                         <span class="status-badge">
                             <span class="lang-en">Coming Soon</span><span class="lang-fa">به زودی</span>
@@ -587,16 +689,24 @@
                 </p>
 
                 <div class="socials">
+                    <!-- LINK #7: Contact email (mailto:) -->
                     <a href="mailto:soruoshkoushani@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <!-- LINK #8: Telegram profile -->
                     <a href="https://t.me/sovirgo" class="social-link"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="https://www.instagram.com/soroushko/profilecard/?igsh=MXZsYTNmdG85cTNoZA==" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <!-- LINK #9: Instagram profile -->
+                    <a href="https://www.instagram.com/virgo_studio2?igsh=MTByZWRiaTdkd2I4Ng==" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <!-- LINK #10: X / Twitter profile -->
                     <a href="https://x.com/Soruosh_ko" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="https://youtube.com/@virgoedit?si=_FaUImEEz1ccvi6L" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <!-- LINK #11: YouTube channel -->
+                    <a href="https://youtube.com/@virgo_studio2?si=AQP-qkx7EaS-UCpj" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <!-- LINK #13: TikTok profile -->
+                    <a href="https://www.tiktok.com/@virgo_studio2?_r=1&_t=ZG-98wedDHdGrJ" class="social-link"><i class="fab fa-tiktok"></i></a>
                 </div>
 
                 <div class="footer-bottom">
+                    <!-- LINK #12: Virgo Studio watermark/emblem image (footer) -->
                     <img src="https://i.postimg.cc/9Q5y3mYG/IMG-20260128-171455-915-1-removebg-preview-(1).png" alt="Virgo Mark" class="footer-logo">
-                    
+
                     <div class="copyright">
                         <p>© 2026 <strong style="color: #fff;">Virgo Studio</strong>. All Rights Reserved.</p>
                         <p style="margin-top: 5px; font-size: 0.8rem; opacity: 0.6;">Designed by <span style="color: var(--gold);">Soroush Koushani</span></p>
@@ -623,9 +733,19 @@
             }
         });
 
+        // --- Header shadow on scroll ---
+        const headerEl = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                headerEl.classList.add('scrolled');
+            } else {
+                headerEl.classList.remove('scrolled');
+            }
+        });
+
         // --- Scroll Reveal Animation ---
         const revealElements = document.querySelectorAll('.reveal');
-        
+
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -640,7 +760,7 @@
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let width, height;
-        
+
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
@@ -653,7 +773,7 @@
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
                 this.size = Math.random() * 1.5;
-                this.speedX = (Math.random() - 0.5) * 0.2; // Very slow movement
+                this.speedX = (Math.random() - 0.5) * 0.2;
                 this.speedY = (Math.random() - 0.5) * 0.2;
                 this.brightness = Math.random();
             }
@@ -664,8 +784,7 @@
                 if (this.x > width) this.x = 0;
                 if (this.y < 0) this.y = height;
                 if (this.y > height) this.y = 0;
-                
-                // Twinkle effect
+
                 this.brightness += (Math.random() - 0.5) * 0.05;
                 if (this.brightness > 1) this.brightness = 1;
                 if (this.brightness < 0) this.brightness = 0;
@@ -683,17 +802,16 @@
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            
-            // Draw connection lines for constellations effect
+
             ctx.lineWidth = 0.3;
             for(let i=0; i<stars.length; i++) {
                 for(let j=i+1; j<stars.length; j++) {
                     const dx = stars[i].x - stars[j].x;
                     const dy = stars[i].y - stars[j].y;
                     const dist = Math.sqrt(dx*dx + dy*dy);
-                    
+
                     if(dist < 100) {
-                        ctx.strokeStyle = `rgba(123, 44, 191, ${0.15 - dist/800})`; // Purple faint lines
+                        ctx.strokeStyle = `rgba(123, 44, 191, ${0.15 - dist/800})`;
                         ctx.beginPath();
                         ctx.moveTo(stars[i].x, stars[i].y);
                         ctx.lineTo(stars[j].x, stars[j].y);
