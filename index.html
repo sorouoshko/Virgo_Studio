@@ -151,7 +151,7 @@ body[data-stage="3"] #after-eyes .eye-sub,body[data-stage="4"] #after-eyes .eye-
 .after-inner{width:min(900px,100%);position:relative;z-index:2}
 .after-mono{font: .72rem/1.8 monospace;letter-spacing:4px;color:#8a818d;text-transform:uppercase}
 .after-title{font-size:clamp(2.2rem,6vw,5.2rem);line-height:1.08;letter-spacing:-1.5px;font-weight:500;margin:22px 0}
-.after-copy{max-width:620px;margin:0 auto;color:#9a929f;font-size:1rem;line-height:2}
+.after-copy{max-width:620px;margin:0 auto;color:#b0a2ad;font-size:1rem;line-height:2;text-shadow:0 0 18px #6e122533}
 .after-faint{margin-top:42px;color:#4f4854;font: .66rem monospace;letter-spacing:3px}
 .after-rule{height:1px;width:90px;background:#796d7d;margin:30px auto;opacity:.4}
 .after-room::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 2s}
@@ -428,9 +428,11 @@ body.ambient-on .studio-console{border-color:#bf953f44;box-shadow:0 18px 55px #0
 .shadow-line{font:clamp(2rem,6vw,5rem)/1.2 Georgia,serif;color:#ded7df;text-shadow:0 0 28px #8b294255;opacity:.9}
 .shadow-sub{margin-top:28px;color:#786b79;font:clamp(.65rem,1.5vw,.8rem) monospace;letter-spacing:3px}
 .shadow-figure,.single-shadow{position:absolute;left:50%;top:50%;width:clamp(120px,22vw,220px);height:clamp(280px,55vw,480px);transform:translate(-50%,-58%);opacity:0;pointer-events:none;filter:blur(1.5px);transition:opacity 4s}
-.shadow-figure:before,.single-shadow:before{content:"";position:absolute;left:50%;top:0;width:38%;height:27%;transform:translateX(-50%);border-radius:48% 48% 42% 42%;background:#000;box-shadow:0 0 55px 24px #000}
+.lurker-face{position:absolute;z-index:3;left:50%;top:2%;width:78%;height:43%;transform:translateX(-50%);opacity:0;filter:contrast(1.35) drop-shadow(0 0 18px #9d1734);transition:opacity 2s}.shadow-figure:before,.single-shadow:before{content:"";position:absolute;left:50%;top:0;width:38%;height:27%;transform:translateX(-50%);border-radius:48% 48% 42% 42%;background:#000;box-shadow:0 0 55px 24px #000}
 .shadow-figure:after,.single-shadow:after{content:"";position:absolute;left:50%;bottom:0;width:100%;height:78%;transform:translateX(-50%);background:#000;clip-path:polygon(34% 0,66% 0,82% 18%,100% 100%,0 100%,18% 18%);filter:drop-shadow(0 0 24px #000)}
 #after-eyes.seen .shadow-figure,body[data-stage="3"] .shadow-figure,body[data-stage="4"] .shadow-figure,body[data-stage="5"] .shadow-figure{opacity:.98;animation:shadowSway 12s ease-in-out infinite}
+#after-eyes.seen .lurker-face,body[data-stage="3"] .lurker-face,body[data-stage="4"] .lurker-face,body[data-stage="5"] .lurker-face{opacity:.82;animation:faceAppear 7s steps(2,end) infinite}
+@keyframes faceAppear{0%,88%,100%{opacity:.12;transform:translateX(-50%) scale(.96)}90%,94%{opacity:.95;transform:translateX(-50%) scale(1.04)}}
 @keyframes shadowSway{0%,100%{transform:translate(-50%,-58%)}50%{transform:translate(calc(-50% + 8px),-60%)}}
 .haunt-gallery{height:clamp(280px,55vw,480px);margin:35px auto 10px;position:relative}
 .single-shadow{opacity:0;top:50%;height:100%;width:clamp(130px,24vw,230px)}
@@ -457,7 +459,7 @@ body[data-haunt="false"] #analog-noise,body[data-haunt="false"] .signal-break{di
 /* A horned shadow-face replaces the old featureless silhouette. */
 .scream-demon{width:clamp(180px,34vw,310px)!important;height:clamp(260px,48vw,410px)!important;filter:drop-shadow(0 0 28px #6e172b88);opacity:0;top:50%}
 .scream-demon:before,.scream-demon:after{display:none!important}
-.scream-demon .demon-face{width:100%;height:100%;overflow:visible;animation:demonScream 4.8s ease-in-out infinite;transform-origin:50% 55%}
+.scream-demon .demon-face{width:100%;height:100%;overflow:visible;animation:demonScream 3.4s ease-in-out infinite;filter:contrast(1.45) drop-shadow(0 0 24px #8e102d);transform-origin:50% 55%}
 #after-haunt.seen .scream-demon,body[data-stage="4"] .scream-demon,body[data-stage="5"] .scream-demon{opacity:1;animation:demonReveal 2.2s ease-out both}
 @keyframes demonReveal{0%{opacity:0;filter:blur(18px);transform:translate(-50%,-48%) scale(.72)}65%{opacity:1;filter:blur(1px);transform:translate(-50%,-58%) scale(1.06)}100%{opacity:1;filter:blur(0);transform:translate(-50%,-58%) scale(1)}}
 @keyframes demonScream{0%,100%{transform:scaleY(1) translateY(0)}45%{transform:scaleY(1.035) translateY(-3px)}}
@@ -481,6 +483,42 @@ body[data-haunt="false"] .signal-break{
   display:none !important;
   opacity:0 !important;
 }
+
+
+/* Long, uncomfortable pauses between individual horror beats. */
+body[data-haunt="true"] .afterword > .after-room + .after-room::before{
+  content:"";
+  display:block;
+  height:clamp(65vh,82vh,105vh);
+  width:100%;
+  background:linear-gradient(180deg,#020103 0%,#050307 48%,#020103 100%);
+  border-top:1px solid #ffffff04;
+  border-bottom:1px solid #ffffff04;
+  pointer-events:none;
+}
+body[data-haunt="true"] .afterword > .after-room{
+  min-height:100svh;
+}
+body[data-haunt="true"] .afterword > .after-room + .after-room{
+  padding-top:clamp(100px,14vh,180px);
+}
+
+
+.browser-corruption{
+  display:none;max-width:760px;margin:28px auto 0;padding:14px 18px;
+  text-align:left;background:#030204;border:1px solid #9c2442;
+  box-shadow:0 0 35px #a20d3422,inset 0 0 25px #000;
+  color:#a58b98;font:clamp(.58rem,1.5vw,.78rem)/1.55 monospace;
+  overflow:hidden;direction:ltr;min-height:118px
+}
+.browser-corruption .corrupt-head{color:#d14c69;letter-spacing:2px;border-bottom:1px solid #70203966;padding-bottom:8px;margin-bottom:8px}
+.browser-corruption pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:150px;overflow:hidden}
+body[data-stage="5"] .browser-corruption{display:block;animation:browserTear .17s steps(2,end) infinite}
+body[data-stage="5"] .browser-corruption pre{animation:codeFlicker .11s steps(2,end) infinite}
+@keyframes browserTear{0%,100%{transform:translateX(0);clip-path:inset(0)}35%{transform:translateX(3px);clip-path:inset(12% 0 64%)}70%{transform:translateX(-4px);clip-path:inset(68% 0 8%)}}
+@keyframes codeFlicker{50%{color:#e1b4c0;text-shadow:2px 0 #c12b50,-2px 0 #197f8d}}
+body[data-stage="5"]{animation:pageMicroGlitch .22s steps(2,end) 9}
+@keyframes pageMicroGlitch{0%,100%{filter:none}30%{filter:contrast(1.3) hue-rotate(12deg)}60%{filter:contrast(1.5) saturate(.4)}}
 
 </style>
 </head>
@@ -535,8 +573,9 @@ body[data-haunt="false"] .signal-break{
 <section class="deep-gap" id="deep-gap" aria-label="A long silence">
   <div class="gap-whisper" data-en="You can stop here." data-fa="می‌توانی همین‌جا متوقف شوی.">می‌توانی همین‌جا متوقف شوی.</div>
   <div class="gap-coordinate">— NO FURTHER CONTENT —</div>
-  <div class="laugh-stream" aria-hidden="true">😂 😂 🤣 😂 🤣 😂 😂 🤣 😂 😂 🤣 😂</div>
-  <div class="laugh-stream laugh-stream-two" aria-hidden="true">🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣</div>
+  <div class="laugh-stream" aria-hidden="true">😂 🤣 😂 🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣</div>
+  <div class="laugh-stream laugh-stream-two" aria-hidden="true">🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣 😂 🤣 😂 😂 🤣</div>
+  <div class="laugh-stream laugh-stream-two" aria-hidden="true">😂😂😂🤣🤣🤣😂😂😂🤣🤣🤣😂😂😂🤣🤣🤣😂😂😂🤣🤣🤣</div>
 
   <div class="gap-whisper lower" data-en="There is still something below." data-fa="هنوز چیزی در پایین منتظر است.">هنوز چیزی در پایین منتظر است.</div>
 </section>
@@ -545,11 +584,11 @@ body[data-haunt="false"] .signal-break{
   <section class="after-room relocated-whisper" id="after-whisper">
     <div class="after-inner">
       <div class="after-mono"><span class="signal-dot"></span> [ SIGNAL STATUS: UNSTABLE ]</div>
-      <p class="whisper glitch" data-en="A strange thing happens when you stay inside a story long enough." data-fa="وقتی به‌اندازه کافی در یک داستان بمانید، اتفاق عجیبی رخ می‌دهد.">وقتی به‌اندازه کافی در یک داستان بمانید، اتفاق عجیبی رخ می‌دهد.</p>
-      <p class="after-copy relocated-line" data-en="You begin to notice things that were there from the beginning." data-fa="کم‌کم چیزهایی را می‌بینید که از اول آنجا بوده‌اند.">کم‌کم چیزهایی را می‌بینید که از اول آنجا بوده‌اند.</p>
+      <p class="whisper glitch" data-en="A strange thing happens when you stay inside a story long enough." data-fa="اگر بیش از حد در این صفحه بمانی، چیزی از پشتِ نوشته‌ها راهش را به این‌طرف پیدا می‌کند.">اگر بیش از حد در این صفحه بمانی، چیزی از پشتِ نوشته‌ها راهش را به این‌طرف پیدا می‌کند.</p>
+      <p class="after-copy relocated-line" data-en="You begin to notice things that were there from the beginning." data-fa="اول فقط یک لکه بود. بعد شبیه صورت شد. حالا هر بار که پلک می‌زنی، کمی نزدیک‌تر است.">اول فقط یک لکه بود. بعد شبیه صورت شد. حالا هر بار که پلک می‌زنی، کمی نزدیک‌تر است.</p>
       <div class="relocated-code">V / 0 / I / D</div>
-      <h2 class="after-title glitch relocated-still" data-en="You're still here." data-fa="هنوز اینجایی.">هنوز اینجایی.</h2>
-      <p class="after-copy relocated-question" data-en="The page hasn't changed. Has it?" data-fa="صفحه که تغییری نکرده. مگه نه؟">صفحه که تغییری نکرده. مگه نه؟</p>
+      <h2 class="after-title glitch relocated-still" data-en="You're still here." data-fa="هنوز اینجایی؟">هنوز اینجایی؟</h2>
+      <p class="after-copy relocated-question" data-en="The page hasn't changed. Has it?" data-fa="به صفحه نگاه کن. چیزی عوض نشده؟ پس چرا آن صورت دیگر در انعکاس نیست؟">به صفحه نگاه کن. چیزی عوض نشده؟ پس چرا آن صورت دیگر در انعکاس نیست؟</p>
       <div class="after-faint">SCROLL POSITION: NOT WHERE IT SHOULD BE</div>
     </div>
   </section>
@@ -558,7 +597,7 @@ body[data-haunt="false"] .signal-break{
       <div class="after-mono" data-en="END OF PAGE · THANK YOU FOR VISITING" data-fa="پایان صفحه · از بازدید شما سپاسگزاریم">END OF PAGE · THANK YOU FOR VISITING</div>
       <div class="after-rule"></div>
       <h2 class="after-title" data-en="That was Virgo Studio." data-fa="این‌جا ویرگو استودیو بود.">That was Virgo Studio.</h2>
-      <p class="after-copy" data-en="Everything has been shown. The stories, the work, the contact details. There is nothing else below." data-fa="همه‌چیز نمایش داده شد؛ داستان‌ها، آثار و راه‌های ارتباطی. چیز دیگری در پایین صفحه نیست.">Everything has been shown. The stories, the work, the contact details. There is nothing else below.</p>
+      <p class="after-copy" data-en="Everything has been shown. The stories, the work, the contact details. There is nothing else below." data-fa="همه‌چیز تمام شده بود. صفحه بسته شده بود. اما چیزی که پشت این صفحه پنهان شده، هنوز بیدار است.">Everything has been shown. The stories, the work, the contact details. There is nothing else below.</p>
       <div class="after-faint" data-en="YOU MAY CLOSE THIS PAGE" data-fa="می‌توانید این صفحه را ببندید">YOU MAY CLOSE THIS PAGE</div>
     </div>
   </section>
@@ -566,8 +605,8 @@ body[data-haunt="false"] .signal-break{
   <section class="after-room" id="after-signal">
     <div class="after-inner">
       <div class="after-mono"><span class="signal-dot"></span><span data-en="AUDIO / VISUAL SYSTEM · UNEXPECTED INPUT" data-fa="سامانهٔ صوتی/تصویری · ورودی غیرمنتظره">AUDIO / VISUAL SYSTEM · UNEXPECTED INPUT</span></div>
-      <h2 class="after-title glitch" data-en="Did you scroll past the end?" data-fa="از انتهای صفحه هم عبور کردی؟">Did you scroll past the end?</h2>
-      <p class="after-copy" data-en="This section is not part of the website. It was not here a moment ago." data-fa="این بخش جزئی از وب‌سایت نیست. همین چند لحظه پیش این‌جا نبود.">This section is not part of the website. It was not here a moment ago.</p>
+      <h2 class="after-title glitch" data-en="Did you scroll past the end?" data-fa="چرا از انتهای صفحه عبور کردی؟">Did you scroll past the end?</h2>
+      <p class="after-copy" data-en="This section should not be here. A temporary rendering error has exposed hidden content. Do not scroll any farther. Refresh the page now. If the words remain after the refresh, you were never outside the page." data-fa="این قسمت از سایت نباید این‌جا باشد. یک خطای موقت، محتوای پنهان را آشکار کرده است. لطفاً پایین‌تر نرو. همین حالا صفحه را رفرش کن. اگر نوشته‌ها بعد از رفرش هم باقی ماندند، یعنی دیگر از صفحه بیرون نرفته‌ای.">This section should not be here. A temporary rendering error has exposed hidden content. Do not scroll any farther. Refresh the page now. If the words remain after the refresh, you were never outside the page.</p>
       <div class="signal-readout">SIGNAL: <span style="color:#b44b61">FOUND</span><br>ORIGIN: UNKNOWN<br>FRAME: 00:00:00</div>
       <div class="after-faint">PLEASE KEEP SCROLLING</div>
     </div>
@@ -600,11 +639,22 @@ body[data-haunt="false"] .signal-break{
 
 
   <section class="after-room shadow-room" id="after-eyes" aria-label="A shadow in the dark">
-    <div class="shadow-figure" aria-hidden="true"></div>
+    <div class="shadow-figure" aria-hidden="true">
+      <svg class="lurker-face" viewBox="0 0 220 280">
+        <defs><radialGradient id="lurkerSkin"><stop stop-color="#4a3a40"/><stop offset=".55" stop-color="#171116"/><stop offset="1" stop-color="#020103"/></radialGradient><filter id="lurkerBlur"><feGaussianBlur stdDeviation="5"/></filter></defs>
+        <path d="M24 110 Q5 22 75 8 Q108 -5 145 8 Q219 23 196 117 L213 270 Q160 244 110 272 Q55 244 7 276Z" fill="#050306"/>
+        <path d="M42 80 Q53 20 110 24 Q170 19 180 83 L166 193 Q147 246 110 251 Q67 239 52 190Z" fill="url(#lurkerSkin)" stroke="#59434d" stroke-width="2"/>
+        <path d="M54 112 Q82 80 102 116 Q79 137 54 112 M166 112 Q138 80 118 116 Q141 137 166 112" fill="#010102"/>
+        <ellipse cx="80" cy="114" rx="12" ry="5" fill="#b51d3d" filter="url(#lurkerBlur)"/><ellipse cx="140" cy="114" rx="12" ry="5" fill="#b51d3d" filter="url(#lurkerBlur)"/>
+        <path d="M110 123 L99 167 L113 174 L121 164Z" fill="#070508"/>
+        <path d="M78 184 Q110 166 143 184 Q149 226 110 232 Q72 222 78 184Z" fill="#010102" stroke="#7d3548" stroke-width="2"/>
+        <path d="M84 187 L94 205 L102 188 L111 210 L121 188 L132 205 L140 187" fill="none" stroke="#c7b6bd" stroke-width="4"/>
+      </svg>
+    </div>
     <div class="after-inner">
       <div class="after-mono"><span class="signal-dot"></span> SIGNAL LOST · ONE PRESENCE</div>
       <p class="shadow-line" data-en="It wasn't there a moment ago." data-fa="یک لحظه پیش، آن‌جا نبود.">یک لحظه پیش، آن‌جا نبود.</p>
-      <p class="shadow-sub" data-en="Don't turn around. Just keep scrolling." data-fa="برنگرد. فقط به اسکرول کردن ادامه بده.">برنگرد. فقط به اسکرول کردن ادامه بده.</p>
+      <p class="shadow-sub" data-en="Don't turn around. Just keep scrolling." data-fa="به پشت سرت نگاه نکن. اگر دیدی‌اش، وانمود کن که ندیدی. او از نگاهت می‌فهمد که متوجه حضورش شده‌ای.">به پشت سرت نگاه نکن. اگر دیدی‌اش، وانمود کن که ندیدی. او از نگاهت می‌فهمد که متوجه حضورش شده‌ای.</p>
     </div>
   </section>
 
@@ -612,8 +662,8 @@ body[data-haunt="false"] .signal-break{
     <div class="haunt-fog" aria-hidden="true"></div>
     <div class="after-inner haunt-content">
       <div class="after-mono"><span class="signal-dot"></span> PRESENCE DETECTED · COUNT: UNKNOWN</div>
-      <h2 class="after-title glitch" data-en="They were never inside the screen." data-fa="آن‌ها هیچ‌وقت داخل صفحه نبودند.">آن‌ها هیچ‌وقت داخل صفحه نبودند.</h2>
-      <p class="after-copy" data-en="The screen was only the place where you first noticed them." data-fa="صفحه فقط جایی بود که برای اولین بار متوجه حضورشان شدی.">صفحه فقط جایی بود که برای اولین بار متوجه حضورشان شدی.</p>
+      <h2 class="after-title glitch" data-en="DON'T LOOK BEHIND YOU." data-fa="پشت سرت را نگاه نکن.">پشت سرت را نگاه نکن.</h2>
+      <p class="after-copy" data-en="A moment ago, the figure in the reflection was standing behind you. Now it is standing where your reflection should be. There is one problem: you haven't moved." data-fa="در انعکاس، کسی پشت سرت ایستاده بود. حالا دیگر پشت سرت نیست؛ جای تو را گرفته است. لب‌هایش تکان می‌خورند، اما صدایش از بلندگو نمی‌آید... از داخل سرت می‌آید. تو هنوز تکان نخورده‌ای. پس چه کسی دارد به جای تو لبخند می‌زند؟">در انعکاس، کسی پشت سرت ایستاده بود. حالا دیگر پشت سرت نیست؛ جای تو را گرفته است. لب‌هایش تکان می‌خورند، اما صدایش از بلندگو نمی‌آید... از داخل سرت می‌آید. تو هنوز تکان نخورده‌ای. پس چه کسی دارد به جای تو لبخند می‌زند؟</p>
       <div class="haunt-gallery" aria-hidden="true"><div class="single-shadow scream-demon">
           <svg class="demon-face" viewBox="0 0 300 390" role="img" aria-label="A dark horned demon face screaming">
             <defs>
@@ -641,8 +691,8 @@ body[data-haunt="false"] .signal-break{
           </svg>
         </div></div>
       <div class="haunt-phrases">
-        <p data-en="Don't look at the one that has no eyes." data-fa="به آن‌که چشم ندارد نگاه نکن.">به آن‌که چشم ندارد نگاه نکن.</p>
-        <p data-en="There is only one shadow." data-fa="فقط یک سایه وجود دارد.">فقط یک سایه وجود دارد.</p>
+        <p data-en="Don't look at the one that has no eyes." data-fa="اگر چشم‌هایش را دیدی، یعنی او هم تو را دیده است.">اگر چشم‌هایش را دیدی، یعنی او هم تو را دیده است.</p>
+        <p data-en="There is only one shadow." data-fa="شمارش را اشتباه نکن. سایهٔ دوم مال تو نیست.">شمارش را اشتباه نکن. سایهٔ دوم مال تو نیست.</p>
         <p data-en="We have been standing behind the words." data-fa="ما پشت کلمه‌ها ایستاده بودیم.">ما پشت کلمه‌ها ایستاده بودیم.</p>
       </div>
       <div class="after-faint">DO NOT LOOK AWAY · IT DOES NOT MOVE</div>
@@ -698,7 +748,7 @@ body[data-haunt="false"] .signal-break{
       <h2 class="after-title glitch" data-en="You weren't meant to find this." data-fa="قرار نبود این را پیدا کنی.">You weren't meant to find this.</h2>
       <div class="dialogue-log">
         <div class="dialogue-line"><span> SOROUSH </span><p data-en="Who are you?" data-fa="تو کی هستی؟">Who are you?</p></div>
-        <div class="dialogue-line"><span> UNKNOWN </span><p data-en="You gave me a name the first time." data-fa="بار اول خودت برایم یک اسم انتخاب کردی.">You gave me a name the first time.</p></div>
+        <div class="dialogue-line"><span> UNKNOWN </span><p data-en="You gave me a name the first time." data-fa="تو اولین بار اسمم را گذاشتی. یادت نیست؟ من هنوز همان‌جا منتظرم.">You gave me a name the first time.</p></div>
         <div class="dialogue-line"><span> SOROUSH </span><p data-en="I don't remember you." data-fa="من تو را به یاد نمی‌آورم.">I don't remember you.</p></div>
         <div class="dialogue-line"><span> UNKNOWN </span><p data-en="You always say that before you close the page." data-fa="هر بار قبل از بستن صفحه همین را می‌گویی.">You always say that before you close the page.</p></div>
         <div class="dialogue-line"><span> SOROUSH </span><p data-en="This is just a website." data-fa="این فقط یک وب‌سایت است.">This is just a website.</p></div>
@@ -711,12 +761,12 @@ body[data-haunt="false"] .signal-break{
   <section class="after-room dialogue-room" id="after-last-message">
     <div class="after-inner">
       <div class="after-mono">DRAFT MESSAGE · NEVER SENT</div>
-      <h2 class="after-title glitch" data-en="One last thing before you go." data-fa="قبل از رفتنت، فقط یک چیز دیگر.">One last thing before you go.</h2>
+      <h2 class="after-title glitch" data-en="DON'T CLOSE THIS TAB. IT KNOWS WHEN YOU DO." data-fa="این زبانه را نبند. می‌فهمد چه زمانی می‌بندیش.">این زبانه را نبند. می‌فهمد چه زمانی می‌بندیش.</h2>
       <div class="dialogue-log">
-        <div class="dialogue-line"><span> UNKNOWN </span><p data-en="Look at the page title." data-fa="به عنوان صفحه نگاه کن.">Look at the page title.</p></div>
-        <div class="dialogue-line"><span> SYSTEM </span><p data-en="VIRGO STUDIO — THE DESCENT" data-fa="ویرگو استودیو — سقوط">VIRGO STUDIO — THE DESCENT</p></div>
-        <div class="dialogue-line"><span> UNKNOWN </span><p data-en="It was never describing the website." data-fa="این عنوان هیچ‌وقت دربارهٔ وب‌سایت نبود.">It was never describing the website.</p></div>
-        <div class="dialogue-line"><span> UNKNOWN </span><p data-en="It was describing the person who kept coming back." data-fa="دربارهٔ کسی بود که مدام برمی‌گشت.">It was describing the person who kept coming back.</p></div>
+        <div class="dialogue-line"><span> UNKNOWN </span><p data-en="Don't close the tab. I can see the little X moving." data-fa="زبانه را نبند. می‌توانم ببینم آن ضربدر کوچک دارد حرکت می‌کند.">Don't close the tab. I can see the little X moving.</p></div>
+        <div class="dialogue-line"><span> SYSTEM </span><p data-en="No active microphone. No active camera. No second user." data-fa="میکروفون فعالی وجود ندارد. دوربین فعالی وجود ندارد. کاربر دومی هم نیست.">No active microphone. No active camera. No second user.</p></div>
+        <div class="dialogue-line"><span> UNKNOWN </span><p data-en="Then why did you just turn around?" data-fa="پس چرا همین الان از گوشهٔ چشمت پشت سرت را نگاه کردی؟ من تکان نخورده بودم... تا وقتی که تو پلک زدی.">Then why did you just turn around?</p></div>
+        <div class="dialogue-line"><span> UNKNOWN </span><p data-en="Koushaniiiiiiiiiiiiiii&@$&-((( ... I found the part of the page you forgot to hide." data-fa="Koushaniiiiiiiiiiiiiii&@$&-((( ... پیدایت کردم. این بار پشت صفحه پنهان نشو. من چهره‌ات را از انعکاس یاد گرفته‌ام.">Koushaniiiiiiiiiiiiiii&@$&-((( ... I found the part of the page you forgot to hide.</p></div>
       </div>
       <div class="after-faint">MESSAGE SAVED · RECIPIENT: YOU</div>
     </div>
@@ -727,8 +777,8 @@ body[data-haunt="false"] .signal-break{
     <div class="after-inner">
       <div class="sync-mark" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="after-mono">END OF TRANSMISSION</div>
-      <h2 class="after-title final-line" data-en="You have reached the end." data-fa="به انتهای مسیر رسیدی.">You have reached the end.</h2>
-      <p class="after-copy final-subline" data-en="But something stayed behind." data-fa="اما چیزی در این‌جا باقی ماند.">But something stayed behind.</p>
+      <h2 class="after-title final-line" data-en="YOU CAN STOP SCROLLING NOW." data-fa="دیگر اسکرول نکن. او رسیده است.">دیگر اسکرول نکن. او رسیده است.</h2>
+      <p class="after-copy final-subline" data-en="The page has stopped following your finger. Something else hasn't." data-fa="صفحه دیگر حرکت انگشتت را دنبال نمی‌کند. اما یک چیز دیگر هنوز دنبال می‌کند.">صفحه دیگر حرکت انگشتت را دنبال نمی‌کند. اما یک چیز دیگر هنوز دنبال می‌کند.</p>
       <div class="epitaph">Soroush koushani die 2088-2028</div>
       <div class="terminal-wrap" aria-label="Recovered local browser log">
         <div class="terminal-head"><span class="terminal-led"></span> ROOT CONSOLE // RECOVERY MODE <span class="terminal-live">LIVE</span></div>
@@ -751,6 +801,10 @@ body[data-haunt="false"] .signal-break{
           <span>VIEWPORT: <b id="client-viewport">READING...</b></span>
         </div>
         <div class="terminal-last" id="terminal-last">> waiting for second heartbeat<span class="terminal-cursor">_</span></div>
+      </div>
+      <div class="browser-corruption" id="browser-corruption" aria-live="off" aria-hidden="true">
+        <div class="corrupt-head">BROWSER_RENDERER // UNRECOVERABLE</div>
+        <pre id="corrupt-code">0x00000000 :: waiting for frame loss</pre>
       </div>
       <p class="last-whisper" data-en="If you can read this, it has already learned the shape of your silence." data-fa="اگر این را می‌خوانی، سکوتت را هم یاد گرفته است.">اگر این را می‌خوانی، سکوتت را هم یاد گرفته است.</p>
       <a href="#top" class="return-link" data-en="RETURN TO THE BEGINNING ↗" data-fa="بازگشت به ابتدای صفحه ↗">RETURN TO THE BEGINNING ↗</a>
@@ -897,6 +951,39 @@ put('client-language',navigator.language||'UNKNOWN');
 try{put('client-timezone',Intl.DateTimeFormat().resolvedOptions().timeZone||'UNKNOWN')}catch(e){put('client-timezone','UNKNOWN')}
 put('client-screen',(screen.width||'?')+' × '+(screen.height||'?')+' @ '+(devicePixelRatio||1)+'x');
 put('client-viewport',(innerWidth||'?')+' × '+(innerHeight||'?'));
+
+const corruptPanel=document.getElementById('browser-corruption');
+const corruptCode=document.getElementById('corrupt-code');
+let corruptionStarted=false;
+const corruptionLines=[
+  '0x00F1 // DOM TREE MISMATCH',
+  'renderer: expected 1 visitor; found 2',
+  'stack_frame[04] -> unknown_process',
+  'WARNING: page boundary moved',
+  'Koushaniiiiiiiiiiiiiii&@$&-((( ',
+  '0xDEAD // mirror_node attached to viewport',
+  'requestAnimationFrame(): source not found',
+  'visibility_state = visible // visibility_state = visible',
+  'ERROR: something is rendering behind this document',
+  'closing session... FAILED',
+  'YOU ARE STILL CONNECTED'
+];
+const corruptionObserver=new IntersectionObserver(entries=>{
+  if(!horrorEnabled || corruptionStarted || !entries.some(e=>e.isIntersecting)) return;
+  corruptionStarted=true;
+  let n=0;
+  const burst=()=>{
+    if(n>=corruptionLines.length) return;
+    const fragment=document.createElement('div');
+    fragment.textContent='> '+corruptionLines[n++];
+    corruptCode.appendChild(document.createTextNode(fragment.textContent+'\\n'));
+    if(corruptCode.textContent.length>1100) corruptCode.textContent=corruptCode.textContent.slice(-850);
+    setTimeout(burst, n<5?75: n<9?48:95);
+  };
+  burst();
+},{threshold:.25});
+if(corruptPanel) corruptionObserver.observe(corruptPanel);
+
 const terminalLast=document.getElementById('terminal-last');
 let terminalTriggered=false;
 const terminalObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
